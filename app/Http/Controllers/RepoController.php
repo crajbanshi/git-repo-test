@@ -15,13 +15,30 @@ class RepoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        
+        $page = $request->input('page');
+		$isAjax = $request->input('ajax');
 		//$data = Repo::all();
-		$data = Repo::paginate(15);
+		$data = Repo::paginate(10);
 		
-		return view('repolist', ['result'=> $data]);
+		
+		 //$data->withPath('repo/ajaxrepo');
+		 if($isAjax){
+			 return ['data'=> $data , 'page'=> $page ];
+		 }
+		
+		return view('repolist', ['result'=> $data, 'page'=> $page ]);
+    }
+	
+	 public function ajaxrepo(Request $request)
+    {
+		
+		$page = $request->input('page');
+		//$data = Repo::all();
+		$data = Repo::paginate(5);
+		
+		return ['data'=> $data , 'page'=> $page ];
     }
 
     /**

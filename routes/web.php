@@ -25,3 +25,5 @@ Route::get('/repo', 'RepoController@index');
 //Route::get('/repo/create', 'RepoController@create');
 
 Route::get('/repo/search', 'RepoController@search');
+
+Route::get('/repo/ajaxrepo', 'RepoController@ajaxrepo');
